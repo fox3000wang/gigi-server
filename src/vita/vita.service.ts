@@ -1,6 +1,15 @@
+
 import fs =  require('fs');
 import path =  require('path');
 import { Injectable } from '@nestjs/common';
+
+type record = {
+  id:number,
+  name: string,
+  URI:string,
+  result:string,
+  date:string,
+}
 
 @Injectable()
 export class VitaService {
@@ -11,32 +20,49 @@ export class VitaService {
     return JSON.parse(data.toString());
   }
 
-  postRecord(record:any): any {
+  postRecord(record:record): any {
 
     if(!record){
       return 'record is null'
     }
-
-    const fileParh:string = path.join(__dirname, `../../data/record.json`);
 
     function closeFile(err, fd) {
       err && console.error(err);
       fs.close(fd, () => console.log('done'));
     }
 
-    fs.readFile(fileParh, (err, data)=>{
+    const fileParh:string = path.join(__dirname, `../../data/record.json`);
+    const data = fs.readFileSync(fileParh);
+    const records:Array<record> = JSON.parse(data.toString());
+    
+    const newRecord = {
+      ...record,
+      date: new Date().toLocaleDateString()
+    };
+
+    if(this.hasRecord(newRecord, records)){
+      console.error(`has same data！`);
+      return;
+    }
+
+    records.push(newRecord);
+    console.log(record);
+    fs.open(fileParh, 'w', (err, fd) => {
       err && console.error(err);
-      const records:Array<object> = JSON.parse(data.toString());
-      records.push(record);
-
-      console.log(record);
-
-      fs.open(fileParh, 'w', (err, fd) => {
-        err && console.error(err);
-        fs.write(fd, JSON.stringify(records), closeFile);
-      });
-
+      fs.write(fd, JSON.stringify(records), closeFile);
     });
+
+  }
+
+  hasRecord(record:record, records:Array<record>):boolean{
+    let result = false;
+    records.forEach( (r:record) => {
+      console.log(`${r.id} ${r.date} === ${record.id} ${record.date} `);
+      if(record.id === r.id && record.date === r.date){
+        result = true;
+      }
+    });
+    return result;
   }
 
   // private library:Array<object> = [];
