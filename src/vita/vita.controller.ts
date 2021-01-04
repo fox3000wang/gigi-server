@@ -6,12 +6,21 @@ export class VitaController {
   constructor(private readonly vitaService: VitaService) {}
 
   @Get()
-  getLibrary():any {
-    return this.vitaService.getLibrary();
+  getRecord():any{
+    return this.vitaService.getRecord();
   }
 
   @Post()
-  addActiveRecord(@Body() record:any):any{
-    return this.vitaService.recordActive(record);
+  postRecord(@Body() record:any):any{
+    return this.vitaService.postRecord(record);
   }
+
+  // @Get()
+  // getLibrary():any {
+  //   return this.vitaService.getLibrary();
+  // }
+
+
+
+
 }

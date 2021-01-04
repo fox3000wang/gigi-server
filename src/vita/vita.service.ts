@@ -5,21 +5,18 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class VitaService {
   
-  private library:Array<object> = [];
-
-  getLibrary(): any {
-    const fileParh:string = path.join(__dirname, `../../data/chinese.json`);
-    if(this.library['chinese']){
-      return this.library['chinese'];
-    }else{
-      fs.readFile(fileParh, (err, data)=>{
-        err && console.error(err);
-        this.library['chinese'] = JSON.parse(data.toString());
-      });
-    }
+  getRecord():any{
+    const fileParh:string = path.join(__dirname, `../../data/record.json`);
+    const data = fs.readFileSync(fileParh);
+    return JSON.parse(data.toString());
   }
 
-  recordActive(record:any): any {
+  postRecord(record:any): any {
+
+    if(!record){
+      return 'record is null'
+    }
+
     const fileParh:string = path.join(__dirname, `../../data/record.json`);
 
     function closeFile(err, fd) {
@@ -41,4 +38,20 @@ export class VitaService {
 
     });
   }
+
+  // private library:Array<object> = [];
+  // getLibrary(): any {
+  //   const fileParh:string = path.join(__dirname, `../../data/chinese.json`);
+  //   if(this.library['chinese']){
+  //     return this.library['chinese'];
+  //   }else{
+  //     fs.readFile(fileParh, (err, data)=>{
+  //       err && console.error(err);
+  //       this.library['chinese'] = JSON.parse(data.toString());
+  //       return this.library['chinese'];
+  //     });
+  //   }
+  // }
+
+  
 }
