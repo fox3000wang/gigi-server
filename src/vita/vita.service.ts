@@ -41,12 +41,13 @@ export class VitaService {
     };
 
     if(this.hasRecord(newRecord, records)){
-      console.error(`has same data！`);
+      console.error(`has same data!`);
       return;
     }
 
     records.push(newRecord);
     console.log(record);
+    
     fs.open(fileParh, 'w', (err, fd) => {
       err && console.error(err);
       fs.write(fd, JSON.stringify(records), closeFile);
