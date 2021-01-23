@@ -58,7 +58,7 @@ export class VitaService {
   hasRecord(record:record, records:Array<record>):boolean{
     let result = false;
     records.forEach( (r:record) => {
-      console.log(`${r.id} ${r.date} === ${record.id} ${record.date} `);
+      //console.log(`${r.id} ${r.date} === ${record.id} ${record.date} `);
       if(record.id === r.id && record.date === r.date){
         result = true;
       }
