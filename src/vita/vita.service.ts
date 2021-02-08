@@ -9,6 +9,7 @@ type record = {
   URI:string,
   result:string,
   date:string,
+  language:string,
 }
 
 @Injectable()
@@ -30,7 +31,9 @@ export class VitaService {
       fs.close(fd, () => console.log('done'));
     }
 
-    const fileParh:string = path.join(__dirname, `../../data/record.cn.json`);
+    console.log(record);
+    const fileParh:string = path.join(__dirname, `../../data/record.${record.language}.json`);
+    
     const data = fs.readFileSync(fileParh);
     const records:Array<record> = JSON.parse(data.toString());
     
