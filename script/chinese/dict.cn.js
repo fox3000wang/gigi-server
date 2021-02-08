@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const FILE_TXT_PATH = path.join(__dirname, 'chinese.txt');
-const FILE_JSON_PATH = path.join(__dirname, 'chinese.json');
+const FILE_TXT_PATH = path.join(__dirname, 'dict.cn.txt');
+const FILE_JSON_PATH = path.join(__dirname, 'dict.cn.json');
 
 /**
  * 初始化,数据从文本文件,转成json

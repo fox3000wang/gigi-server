@@ -3,7 +3,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const FILE_JSON_PATH = path.join(__dirname, 'chinese.json');
+const FILE_JSON_PATH = path.join(__dirname, 'dict.cn.json');
 
 async function fetchData(data) {
   const url = `https://fanyi.baidu.com/gettts?lan=zh&text=${data.URI}&spd=5&source=web`;
