@@ -15,14 +15,12 @@ function xls2json() {
 
     let i = 1;
     while (sh[`A${i}`] && sh[`B${i}`]) {
-      console.log(sh[`B${i}`].v);
-
       const cn = sh[`B${i}`].v;
-
       result[sh[`A${i}`].v] = {
-        id: i++,
+        id: i - 1,
         cn,
       };
+      i++;
     }
   });
 
