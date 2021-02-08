@@ -21,7 +21,6 @@ export class VitaService {
   }
 
   postRecord(record:record): any {
-
     if(!record){
       return 'record is null'
     }
@@ -58,7 +57,6 @@ export class VitaService {
   hasRecord(record:record, records:Array<record>):boolean{
     let result = false;
     records.forEach( (r:record) => {
-      //console.log(`${r.id} ${r.date} === ${record.id} ${record.date} `);
       if(record.id === r.id && record.date === r.date){
         result = true;
       }
