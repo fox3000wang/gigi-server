@@ -1,4 +1,3 @@
-
 import fs =  require('fs');
 import path =  require('path');
 import { Injectable } from '@nestjs/common';
@@ -16,9 +15,15 @@ type record = {
 export class VitaService {
   
   getRecord():any{
-    const fileParh:string = path.join(__dirname, `../../data/record.cn.json`);
-    const data = fs.readFileSync(fileParh);
-    return JSON.parse(data.toString());
+    const fileParhCn:string = path.join(__dirname, `../../data/record.cn.json`);
+    const dataCn = fs.readFileSync(fileParhCn);
+    const recordCn = JSON.parse(dataCn.toString())
+
+    const fileParhEn = path.join(__dirname, `../../data/record.en.json`);
+    const dataEn = fs.readFileSync(fileParhEn);
+    const recordEn = JSON.parse(dataEn.toString())
+    
+    return {recordCn, recordEn};
   }
 
   postRecord(record:record): any {
