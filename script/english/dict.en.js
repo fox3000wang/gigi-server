@@ -16,13 +16,26 @@ function xls2json() {
     let i = 1;
     while (sh[`A${i}`] && sh[`B${i}`]) {
       const cn = sh[`B${i}`].v;
-      result[sh[`A${i}`].v] = {
-        id: i - 1,
-        cn,
-      };
+
+      if (!result[sh[`A${i}`].v]) {
+        result[sh[`A${i}`].v] = {
+          id: i - 1,
+          cn,
+        };
+      }
       i++;
     }
   });
+
+  // const words = [];
+  // Object.keys(result).map(e => {
+  //   words.push({
+  //     ...result[e],
+  //     name: e,
+  //   });
+  // });
+  // words.sort();
+  // console.log(JSON.stringify(words));
 
   fs.open(FILE_JSON_PATH, 'w', (err, fd) => {
     err && console.error(err);
