@@ -13,13 +13,14 @@ function xls2json() {
   workbook.SheetNames.forEach(sheetName => {
     const sh = workbook.Sheets[sheetName];
 
+    let index = 0;
     let i = 1;
     while (sh[`A${i}`] && sh[`B${i}`]) {
       const cn = sh[`B${i}`].v;
 
       if (!result[sh[`A${i}`].v]) {
         result[sh[`A${i}`].v] = {
-          id: i - 1,
+          id: index++,
           cn,
         };
       }
