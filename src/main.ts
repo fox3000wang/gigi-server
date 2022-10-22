@@ -13,7 +13,12 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
+  
+  const bodyParser = require('body-parser');
+  app.use(bodyParser.json({limit:'50mb'}));
+  app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
   app.enableCors();
+  
   await app.listen(9999);
 }
 bootstrap();
