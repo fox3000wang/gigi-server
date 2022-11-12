@@ -48,18 +48,10 @@ export class VitaService {
   }
 
   async getRecord() {
-    const sql = `SELECT * FROM record WHERE lang='cn';`;
-    let rows = await this.query(sql);
-    const recordCn = JSON.stringify(rows);
-
-    const sqlEn = `SELECT * FROM record WHERE lang='en';`;
-    rows = await this.query(sqlEn);
-    const recordEn = JSON.stringify(rows);
-
+    const recordCn = await this.query(`SELECT * FROM record WHERE lang='cn';`);
+    const recordEn = await this.query(`SELECT * FROM record WHERE lang='en';`);
     return { recordCn, recordEn };
   }
-
-  //return {recordCn, recordEn};
 
   postRecord(record: record): any {
     if (!record) {
@@ -108,18 +100,4 @@ export class VitaService {
     });
     return result;
   }
-
-  // private library:Array<object> = [];
-  // getLibrary(): any {
-  //   const fileParh:string = path.join(__dirname, `../../data/chinese.json`);
-  //   if(this.library['chinese']){
-  //     return this.library['chinese'];
-  //   }else{
-  //     fs.readFile(fileParh, (err, data)=>{
-  //       err && console.error(err);
-  //       this.library['chinese'] = JSON.parse(data.toString());
-  //       return this.library['chinese'];
-  //     });
-  //   }
-  // }
 }
