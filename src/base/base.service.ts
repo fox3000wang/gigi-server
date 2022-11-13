@@ -4,7 +4,8 @@ export class BaseService {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mysql = require('mysql2');
     this.pool = mysql.createPool({
-      host: 'wangzm.cn',
+      //host: 'wangzm.cn',
+      host: '127.0.0.1',
       user: 'user',
       password: 'useruser',
       database: 'gigi',
