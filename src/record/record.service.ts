@@ -1,5 +1,3 @@
-import fs = require('fs');
-import path = require('path');
 import { Injectable } from '@nestjs/common';
 
 type record = {
@@ -12,7 +10,7 @@ type record = {
 };
 
 @Injectable()
-export class VitaService {
+export class RecordService {
   pool: any;
   constructor() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -53,6 +51,11 @@ export class VitaService {
     return { recordCn, recordEn };
   }
 
+  async postRecord(record: record) {
+    return {};
+  }
+
+  /*
   postRecord(record: record): any {
     if (!record) {
       return 'record is null';
@@ -90,6 +93,7 @@ export class VitaService {
       fs.write(fd, JSON.stringify(records), closeFile);
     });
   }
+*/
 
   hasRecord(record: record, records: Array<record>): boolean {
     let result = false;
